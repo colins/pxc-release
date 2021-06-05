@@ -57,14 +57,13 @@ func scaleDeployment(instanceCount int) error {
 	return err
 }
 
-func verifyDataExists(expectedString string, databaseConnection *sql.DB) {
-	var queryResultString string
-	query := fmt.Sprintf("SELECT * FROM pxc_release_test_db.scaling_test_table WHERE test_data='%s'", expectedString)
-	rows, err := databaseConnection.Query(query)
-	Expect(err).NotTo(HaveOccurred())
-	rows.Next()
-	rows.Scan(&queryResultString)
-	Expect(queryResultString).NotTo(BeEmpty())
+func verifyDataExists(expectedString string, db *sql.DB) {
+	const query = `SELECT test_data FROM pxc_release_test_db.scaling_test_table WHERE test_data = ?`
+
+	var result string
+	err := db.QueryRow(query, expectedString).Scan(&result)
+	ExpectWithOffset(1, err).NotTo(HaveOccurred())
+	ExpectWithOffset(1, result).NotTo(BeEmpty())
 }
 
 var _ = Describe("CF PXC MySQL Scaling", func() {
