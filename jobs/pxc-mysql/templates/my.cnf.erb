@@ -65,7 +65,7 @@ wsrep_max_ws_size               = <%= p('engine_config.galera.wsrep_max_ws_size'
 wsrep_node_address              = <%= spec.ip %>:<%= p('engine_config.galera.port') %>
 wsrep_node_name                 = <%= name %>/<%= index %>
 wsrep_on                        = ON
-wsrep_provider                  = /var/vcap/packages/libgalera/lib/libgalera_smm.so
+wsrep_provider                  = /var/vcap/packages/pxc/lib/libgalera_smm.so
 wsrep_provider_options          = "gcache.size=<%= p('engine_config.galera.gcache_size') %>M;pc.recovery=FALSE;pc.checksum=TRUE;socket.ssl=yes;socket.ssl_ca=/var/vcap/jobs/pxc-mysql/certificates/galera-ca.pem;socket.ssl_cert=/var/vcap/jobs/pxc-mysql/certificates/galera-cert.pem;socket.ssl_key=/var/vcap/jobs/pxc-mysql/certificates/galera-key.pem;socket.ssl_cipher=ECDHE-RSA-AES256-GCM-SHA384"
 wsrep_replicate_myisam          = OFF
 wsrep_slave_threads             = <%= p('engine_config.galera.wsrep_applier_threads') %>

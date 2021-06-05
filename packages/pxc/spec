@@ -2,6 +2,4 @@
 name: pxc
 
 files:
-- boost_*.tar.bz2
-- libaio_*.orig.tar.gz
-- Percona-XtraDB-Cluster-*.tar.gz
+- Percona-XtraDB-Cluster_*.tar.gz
