@@ -3,14 +3,7 @@
 set -eux
 
 source /var/vcap/packages/golang-1.15-linux/bosh/compile.env
-export GOBIN="${BOSH_INSTALL_TARGET}/bin"
-export GOFLAGS="-mod=vendor"
-
-mkdir -p ${GOPATH}/src
-mv github.com ${GOPATH}/src
-go install github.com/onsi/ginkgo/ginkgo
 
 cd specs
-  ${GOBIN}/ginkgo build integration/connection
-  cp integration/connection/connection.test ${BOSH_INSTALL_TARGET}/bin/
+  go test -o "${BOSH_INSTALL_TARGET}/bin/connection.test" -c ./integration/connection
 cd -
